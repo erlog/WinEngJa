@@ -1,0 +1,5 @@
+;!@Install@!UTF-8!
+Directory = ""
+Progress="No"
+RunProgram="setup.exe"
+;!@InstallEnd@!
