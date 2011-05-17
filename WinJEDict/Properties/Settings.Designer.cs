@@ -25,13 +25,13 @@ namespace WinEngJa.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool UserSetting_WatchClipboard {
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UserSetting_MonitorClipboard {
             get {
-                return ((bool)(this["UserSetting_WatchClipboard"]));
+                return ((bool)(this["UserSetting_MonitorClipboard"]));
             }
             set {
-                this["UserSetting_WatchClipboard"] = value;
+                this["UserSetting_MonitorClipboard"] = value;
             }
         }
         
@@ -44,6 +44,18 @@ namespace WinEngJa.Properties {
             }
             set {
                 this["UserSetting_Font"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UserSetting_AlwaysOnTop {
+            get {
+                return ((bool)(this["UserSetting_AlwaysOnTop"]));
+            }
+            set {
+                this["UserSetting_AlwaysOnTop"] = value;
             }
         }
     }

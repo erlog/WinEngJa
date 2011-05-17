@@ -42,11 +42,11 @@ namespace WpfApplication1
 
         private void Window_SourceInitialized(object sender, EventArgs e)
         {
-            //Get our handle, and register ourselves for WNDPROC and WM_CLIPBOARDCHANGED Events
             windowHandle = (new WindowInteropHelper(this)).Handle;
-            HwndSource src = HwndSource.FromHwnd(windowHandle);
-            src.AddHook(new HwndSourceHook(WndProc));
-            AddClipboardFormatListener(windowHandle);
+            if (WinEngJa.Properties.Settings.Default.UserSetting_MonitorClipboard)
+            {
+                Hook_Clipboard();
+            }
             //Connect to our database.
             db_conn = new SQLiteConnection();
             db_conn.ConnectionString = "Data Source=" + @".\Inputs\jmdict.sqlite";
@@ -55,7 +55,23 @@ namespace WpfApplication1
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            result_box.Text = "WinEngJa contains an adapted version of JMDict. Original JMDict is available from http://www.edrdg.org under a Creative Commons License.\n\nWinEngJa © 2011 John Rozewicki";
+            FontChooser.Text = WinEngJa.Properties.Settings.Default.UserSetting_Font.FontFamily.Name;
+            FontSizeChooser.SelectedItem = (int)WinEngJa.Properties.Settings.Default.UserSetting_Font.SizeInPoints;
+        }
+
+        private void Hook_Clipboard()
+        {
+            HwndSource src = HwndSource.FromHwnd(this.windowHandle);
+            //register ourselves for WNDPROC and WM_CLIPBOARDCHANGED Events
+            src.AddHook(new HwndSourceHook(WndProc));
+            AddClipboardFormatListener(this.windowHandle);
+        }
+
+        private void Release_Clipboard()
+        {
+            RemoveClipboardFormatListener(this.windowHandle);
+            HwndSource src = HwndSource.FromHwnd(this.windowHandle);
+            src.RemoveHook(new HwndSourceHook(this.WndProc));
         }
 
         private void Clipboard_Changed()
@@ -139,11 +155,12 @@ namespace WpfApplication1
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            RemoveClipboardFormatListener(windowHandle);
+            if (WinEngJa.Properties.Settings.Default.UserSetting_MonitorClipboard)
+            {
+                Release_Clipboard();
+            }
             //db_conn.Close();
             //db_conn.Dispose();
-            HwndSource src = HwndSource.FromHwnd(windowHandle);
-            src.RemoveHook(new HwndSourceHook(this.WndProc));
         }
 
         private void search_box_PreviewKeyUp(object sender, KeyEventArgs e)
@@ -162,5 +179,45 @@ namespace WpfApplication1
 
         }
 
+        private void FontChooser_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            WinEngJa.Properties.Settings.Default.UserSetting_Font = new System.Drawing.Font(FontChooser.SelectedItem.ToString(), WinEngJa.Properties.Settings.Default.UserSetting_Font.Size);
+            WinEngJa.Properties.Settings.Default.Save();
+            
+        }
+
+        private void FontSizeChooser_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            WinEngJa.Properties.Settings.Default.UserSetting_Font = new System.Drawing.Font(WinEngJa.Properties.Settings.Default.UserSetting_Font.FontFamily, (int)FontSizeChooser.SelectedItem);
+            WinEngJa.Properties.Settings.Default.Save();
+        }
+
+        private void checkBox_monitorclipboard_Checked(object sender, RoutedEventArgs e)
+        {
+            if (this.IsLoaded)
+            {
+                Hook_Clipboard();
+            }
+            WinEngJa.Properties.Settings.Default.Save();
+        }
+
+        private void checkBox_monitorclipboard_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (this.IsLoaded)
+            {
+                Release_Clipboard();
+            }
+            WinEngJa.Properties.Settings.Default.Save();
+        }
+
+        private void checkBox_alwaysontop_Checked(object sender, RoutedEventArgs e)
+        {
+            WinEngJa.Properties.Settings.Default.Save();
+        }
+
+        private void checkBox_alwaysontop_Unchecked(object sender, RoutedEventArgs e)
+        {
+            WinEngJa.Properties.Settings.Default.Save();
+        }
     }
 }
