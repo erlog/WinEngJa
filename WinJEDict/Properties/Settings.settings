@@ -11,5 +11,8 @@
     <Setting Name="UserSetting_AlwaysOnTop" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="TitleString" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">WinEngJa v0.15</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

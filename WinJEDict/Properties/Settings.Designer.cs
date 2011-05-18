@@ -58,5 +58,14 @@ namespace WinEngJa.Properties {
                 this["UserSetting_AlwaysOnTop"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("WinEngJa v0.15")]
+        public string TitleString {
+            get {
+                return ((string)(this["TitleString"]));
+            }
+        }
     }
 }
