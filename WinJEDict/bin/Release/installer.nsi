@@ -50,6 +50,8 @@ Section "WinEngJa (required)"
   File "WinEngJa.exe"
   File "WinEngJa.pdb"
   File "WinEngJa.exe.config"
+  File "System.Data.SQLite.dll"
+  File "System.Data.SQLite.xml"
   
 
   

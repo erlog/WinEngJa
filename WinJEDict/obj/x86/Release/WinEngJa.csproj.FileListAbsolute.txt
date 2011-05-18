@@ -40,3 +40,6 @@ C:\Users\Erlog\Documents\My Dropbox\C#\WinEngJa\WinJEDict\obj\x86\Release\Genera
 C:\Users\Erlog\Documents\My Dropbox\C#\WinEngJa\WinJEDict\obj\x86\Release\ResGen.write.1.tlog
 C:\Users\Erlog\Documents\My Dropbox\C#\WinEngJa\WinJEDict\obj\x86\Release\WinEngJa.exe
 C:\Users\Erlog\Documents\My Dropbox\C#\WinEngJa\WinJEDict\obj\x86\Release\WinEngJa.pdb
+C:\Users\Erlog\Documents\My Dropbox\C#\WinEngJa\WinJEDict\bin\Release\System.Data.SQLite.dll
+C:\Users\Erlog\Documents\My Dropbox\C#\WinEngJa\WinJEDict\bin\Release\System.Data.SQLite.xml
+C:\Users\Erlog\Documents\My Dropbox\C#\WinEngJa\WinJEDict\bin\Release\installer.nsi
